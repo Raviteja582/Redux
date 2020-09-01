@@ -36,13 +36,22 @@ Send the state to the application          Emits an action to perform
 const prompt = require('prompt-sync')();
 
 const redux = require('redux');
+const combineReducer = redux.combineReducers
 const createStore = redux.createStore
 
-const INCREMENT = 'INCREMENT'                   //ACTIONTYPE
-const DECREMENT = 'DECREMENT'                   //ACTIONTYPE
-const MULTIPLE = 'MULTIPLE'                     //ACTIONTYPE
-const DIVIDE = 'DIVIDE'                         //ACTIONTYPE
-const RESET = 'RESET'                           //ACTIONTYPE
+
+// ACTIONTYPES
+
+const INCREMENT = 'INCREMENT'                   
+const DECREMENT = 'DECREMENT'
+const MULTIPLE = 'MULTIPLE'                     
+const DIVIDE = 'DIVIDE'                         
+const RESET = 'RESET'                           
+
+//ACTIONTYPES for the second reducer
+
+const POWER = 'POWER'
+const SQRT = 'SQRT'
 
 
 /* So After deciding the actions types which are to be performed, then we create  "actions" */
@@ -69,14 +78,14 @@ function decrement(){
 
 function multiple(num){
     return({
-        type: 'MULTIPLE',
+        type: MULTIPLE,
         number: num
     })
 }
 
 function divide(num){
     return({
-        type: 'DIVIDE',
+        type: DIVIDE,
         number: num != 0 ? num : 1
     })
 }
@@ -88,12 +97,33 @@ function reset(){
     })
 }
 
+/* Action creators for the secound reducers */
+
+function power(num){
+    return({
+        type: POWER,
+        number: num
+    })
+}
+
+function sqrt(num){
+    return({
+        type: SQRT,
+        number: num
+    })
+}
+
 /* So that we have action types and actions to be performed on the store. Then we have to declare the state of the application
     That is a simple variable which holds the value after performing each operations
 */
 
 const state_variable ={
-    x:0
+    x : 0
+}
+
+/* state of another application in the store */
+const exponential={
+    b : 25
 }
 
 /*  Then we have a state of the application and actions on the state to perform 
@@ -108,7 +138,7 @@ const state_variable ={
 
 /* So we create a reducer for the store like */
 
-const reducer = (state=state_variable,action) => {
+const basicReducer = (state=state_variable,action) => {
     switch(action.type){
         case INCREMENT:
             return {
@@ -141,6 +171,24 @@ const reducer = (state=state_variable,action) => {
 }
 
 
+/* Created Secound reducer function for the power and sqrt */
+const expReducer = (state=exponential,action) => {
+    switch(action.type){
+        case POWER:
+            return{
+                ...state,
+                b : Math.pow(state.b,action.number)
+            }
+        case SQRT:
+            return{
+                ...state,
+                b : Math.sqrt(state.b,action.number)
+            }
+        default:
+            return state
+    }
+}
+
 /*  So we have:
         - We have application consists of state 
         - We have declared actions to be performed on the state
@@ -154,12 +202,21 @@ const reducer = (state=state_variable,action) => {
 
 /* To create a store we use redux module which is defined */
 
-const store = createStore(reducer) // it will take the reducer which can modify the store.
+/* here we combine the two reducers to act on two state variable */
+
+const rootReducer = combineReducer({
+    basic: basicReducer,
+    expo: expReducer
+})
+
+const store = createStore(rootReducer) // it will take the reducer which can modify the store.
 console.log('Intial state',store.getState());
 const unsubscribe = store.subscribe(() => console.log('Updated State', store.getState())); //Listener to the store and call whenever a modify the state.
 store.dispatch(increment())
 store.dispatch(multiple(5))
 store.dispatch(decrement())
 store.dispatch(divide(2))
+store.dispatch(power(3))
+store.dispatch(sqrt(5))
 store.dispatch(reset())
 unsubscribe()  //Remove the dispatch methods on the stores.
