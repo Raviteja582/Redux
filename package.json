@@ -1,0 +1,15 @@
+{
+  "name": "redux",
+  "version": "1.0.0",
+  "description": "Redux Tutorial",
+  "main": "index.js",
+  "author": "Raviteja",
+  "license": "MIT",
+  "scripts": {
+    "start": "node index"
+  },
+  "dependencies": {
+    "prompt-sync": "^4.2.0",
+    "redux": "^4.0.5"
+  }
+}
