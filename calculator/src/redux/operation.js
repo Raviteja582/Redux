@@ -17,6 +17,7 @@ const reducer = (state=intialState,action) => {
                 ...state,
                 variable: state.variable-1
             }
+        default: return state
     }
 }
 
