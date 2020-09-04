@@ -10,12 +10,12 @@ const store_0 = (state=intialState,action) => {
         case ActionType.INCREMENT:
             return{
                 ...state,
-                variable : state.variable+1
+                variable : state.variable + action.payload
             }
         case ActionType.DECREMENT:
             return{
                 ...state,
-                variable: state.variable-1
+                variable: state.variable - action.payload
             }
         default: return state
     }

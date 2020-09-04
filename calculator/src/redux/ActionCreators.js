@@ -1,14 +1,16 @@
 import * as ActionType from '../redux/ActionType';
-export const increment = () =>{
+export const increment = (number) =>{
     return{
         type: ActionType.INCREMENT,
-        info: 'Increment the variable'
+        payload: isNaN(number) ? number : parseInt(number),
+        info: 'Increment the variable',   
     }
 }
 
-export const decrement = () =>{
+export const decrement = (number) =>{
     return{
         type: ActionType.DECREMENT,
+        payload: isNaN(number) ? number : parseInt(number),
         info: 'Decrement the variable'        
     }
 }

@@ -1,5 +1,4 @@
 import React from 'react';
-import Main from './components/mainComponent';
 import store from '../src/redux/configureStore';
 import { Provider } from 'react-redux';
 import './App.css';
@@ -11,7 +10,6 @@ function App() {
     <Provider store={store}>
       <div className="App">
 		<Hook />
-        <Main />
 		<Linear />
       </div>
     </Provider>

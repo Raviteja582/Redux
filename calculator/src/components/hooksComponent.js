@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { increment,decrement } from '../redux/ActionCreators';
 
@@ -8,12 +8,13 @@ function Hooks() {
 
     //this funtion is used to refer the dispatch in the store.
     const dispatch = useDispatch()
-
+    const [number,setNumber] = useState(1)
     return(
         <div>
             <h3>Number - {x}</h3>
-            <button onClick={() => dispatch(increment())}>Increment</button>
-            <button onClick={() => dispatch(decrement())}>Decrement</button>
+            <input type='text' value={number} onChange={ e => setNumber(e.target.value)} />
+            <button onClick={() => dispatch(increment(number))}>Increment</button>
+            <button onClick={() => dispatch(decrement(number))}>Decrement</button>
         </div>
     )
 }
