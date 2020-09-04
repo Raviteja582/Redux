@@ -34,10 +34,14 @@ Send the state to the application          Emits an action to perform
 */
 
 const prompt = require('prompt-sync')();
-
 const redux = require('redux');
+const reduxLogger = require('redux-logger');
+
+
 const combineReducer = redux.combineReducers
 const createStore = redux.createStore
+const applymiddleware = redux.applyMiddleware
+const logger = reduxLogger.createLogger()
 
 
 // ACTIONTYPES
@@ -209,7 +213,7 @@ const rootReducer = combineReducer({
     expo: expReducer
 })
 
-const store = createStore(rootReducer) // it will take the reducer which can modify the store.
+const store = createStore(rootReducer, applymiddleware(logger)) // it will take the reducer which can modify the store.
 console.log('Intial state',store.getState());
 const unsubscribe = store.subscribe(() => console.log('Updated State', store.getState())); //Listener to the store and call whenever a modify the state.
 store.dispatch(increment())
