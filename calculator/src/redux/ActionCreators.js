@@ -13,3 +13,16 @@ export const decrement = () =>{
     }
 }
 
+export const double = () =>{
+    return{
+        type: ActionType.DOUBLE,
+        info: 'Double the state variable'
+    }
+}
+
+export const half = () => {
+    return{
+        type: ActionType.HALF,
+        info: 'Half the state Variable'
+    }
+}

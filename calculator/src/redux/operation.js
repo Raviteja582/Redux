@@ -5,7 +5,7 @@ const intialState = {
     variable : 0
 }
 
-const reducer = (state=intialState,action) => {
+const store_0 = (state=intialState,action) => {
     switch(action.type){
         case ActionType.INCREMENT:
             return{
@@ -21,4 +21,4 @@ const reducer = (state=intialState,action) => {
     }
 }
 
-export default reducer;
+export default store_0;

@@ -20,7 +20,7 @@ class Main extends Component{
 
 const mapStateToProps = state => {
     return{
-        x: state.variable
+        x: state.linear.variable
     }
 }
 

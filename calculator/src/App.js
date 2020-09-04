@@ -4,6 +4,7 @@ import store from '../src/redux/configureStore';
 import { Provider } from 'react-redux';
 import './App.css';
 import Hook from './components/hooksComponent';
+import Linear from './components/linearComponent';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <div className="App">
 		<Hook />
         <Main />
+		<Linear />
       </div>
     </Provider>
   );

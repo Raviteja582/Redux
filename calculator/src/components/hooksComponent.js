@@ -4,7 +4,7 @@ import { increment,decrement } from '../redux/ActionCreators';
 
 function Hooks() {
     //this function accepts a funtion as parameter called as selector function which gets state of the application same mapStateToProps.                   
-    const x = useSelector(state => state.variable);
+    const x = useSelector(state => state.linear.variable);
 
     //this funtion is used to refer the dispatch in the store.
     const dispatch = useDispatch()
